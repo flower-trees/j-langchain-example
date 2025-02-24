@@ -11,9 +11,6 @@ import org.springframework.context.annotation.Import;
 @Import(JLangchainConfig.class)
 public class DemoApplication {
 
-    @Autowired
-    ChainBuildDemo chainBuildDemo;
-
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }

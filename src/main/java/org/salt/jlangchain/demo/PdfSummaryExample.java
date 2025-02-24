@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.salt.jlangchain.demo.rag.pdf;
+package org.salt.jlangchain.demo;
 
 import org.salt.function.flow.FlowInstance;
 import org.salt.jlangchain.core.BaseRunnable;
