@@ -2,8 +2,6 @@ package org.salt.jlangchain.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.salt.jlangchain.demo.rag.pdf.PdfChatExample;
-import org.salt.jlangchain.demo.rag.pdf.PdfSummaryExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
