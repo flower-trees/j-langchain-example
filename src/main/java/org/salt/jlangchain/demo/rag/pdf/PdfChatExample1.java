@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.salt.jlangchain.demo;
+package org.salt.jlangchain.demo.rag.pdf;
 
 import org.salt.function.flow.FlowInstance;
 import org.salt.function.flow.context.ContextBus;
@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class PdfChatExample {
+public class PdfChatExample1 {
 
     @Autowired
     ChainActor chainActor;
