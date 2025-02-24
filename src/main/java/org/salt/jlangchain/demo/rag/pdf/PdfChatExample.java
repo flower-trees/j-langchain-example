@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package org.salt.jlangchain.demo;
+package org.salt.jlangchain.demo.rag.pdf;
 
 import org.salt.function.flow.FlowInstance;
 import org.salt.function.flow.context.ContextBus;
