@@ -11,13 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DemoApplication.class)
 @SpringBootConfiguration
-public class PdfExampleTest1 {
+public class PdfExampleTest {
 
     @Autowired
-    PdfSummaryExample1 pdfSummaryExample;
+    PdfSummaryExample pdfSummaryExample;
 
     @Autowired
-    PdfChatExample1 pdfChatExample;
+    PdfChatExample pdfChatExample;
 
     @Test
     public void pdfSummary() {

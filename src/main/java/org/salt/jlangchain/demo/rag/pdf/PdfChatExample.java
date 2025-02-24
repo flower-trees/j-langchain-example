@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class PdfChatExample1 {
+public class PdfChatExample {
 
     @Autowired
     ChainActor chainActor;

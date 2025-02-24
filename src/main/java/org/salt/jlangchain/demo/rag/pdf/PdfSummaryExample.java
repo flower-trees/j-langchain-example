@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class PdfSummaryExample1 {
+public class PdfSummaryExample {
 
     @Autowired
     ChainActor chainActor;
