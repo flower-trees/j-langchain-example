@@ -1,0 +1,8 @@
+# RAG配置
+rag:
+  ocr:
+    tesseract:
+      use: true
+  vector:
+    milvus:
+      use: true
