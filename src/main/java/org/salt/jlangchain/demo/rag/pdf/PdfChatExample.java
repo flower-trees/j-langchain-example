@@ -48,8 +48,8 @@ public class PdfChatExample {
 
         PdfboxLoader loader = PdfboxLoader.builder()
                 .filePath("./files/pdf/en/Transformer.pdf")
+                .extractImages(false)
                 .build();
-        loader.setExtractImages(false);
         List<Document> documents = loader.load();
 
         System.out.println("Load documents count:" + documents.size());
