@@ -18,7 +18,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.salt.function.flow.FlowInstance;
 import org.salt.function.flow.Info;
 import org.salt.function.flow.context.ContextBus;
-import org.salt.function.flow.node.IResult;
 import org.salt.jlangchain.core.BaseRunnable;
 import org.salt.jlangchain.core.ChainActor;
 import org.salt.jlangchain.core.llm.ollama.ChatOllama;
@@ -104,11 +103,13 @@ public class ChainBuildDemo {
         FlowInstance jokeChain = chainActor.builder().next(joke).next(llm).build();
         FlowInstance poemChain = chainActor.builder().next(poem).next(llm).build();
 
-        FlowInstance chain = chainActor.builder().concurrent((IResult<Map<String, String>>) (iContextBus, isTimeout) -> {
-            AIMessage jokeResult = iContextBus.getResult(jokeChain.getFlowId());
-            AIMessage poemResult = iContextBus.getResult(poemChain.getFlowId());
-            return Map.of("joke", jokeResult.getContent(), "poem", poemResult.getContent());
-        }, jokeChain, poemChain).build();
+        FlowInstance chain = chainActor.builder()
+                .concurrent(jokeChain, poemChain)
+                .next(input -> {
+                    Map<String, Object> map = (Map<String, Object>) input;
+                    return Map.of("joke", map.get(jokeChain.getFlowId()), "poem", map.get(poemChain.getFlowId()));
+                })
+                .build();
 
         Map<String, String> result = chainActor.invoke(chain, Map.of("topic", "bears"));
         System.out.println(JsonUtil.toJson(result));
@@ -215,12 +216,12 @@ public class ChainBuildDemo {
 
         FlowInstance fullChain = chainActor.builder()
                 .all(
-                        (iContextBus, isTimeout) -> Map.of(
-                                "question", iContextBus.getResult(contextualizeIfNeeded.getFlowId()).toString(),
-                                "context", iContextBus.getResult("fakeRetriever")),
                         Info.c(contextualizeIfNeeded),
                         Info.c(input -> "egypt's population in 2024 is about 111 million").cAlias("fakeRetriever")
                 )
+                .next(input -> Map.of(
+                        "question", ContextBus.get().getResult(contextualizeIfNeeded.getFlowId()).toString(),
+                        "context", ContextBus.get().getResult("fakeRetriever")))
                 .next(qaPrompt)
                 .next(input -> {System.out.println(JsonUtil.toJson(input)); return input;})
                 .next(llm)
